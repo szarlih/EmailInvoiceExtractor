@@ -1,14 +1,15 @@
-﻿using Microsoft.Extensions.Hosting;
+﻿using EmailInvoiceExctractor.Models;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 
 namespace EmailInvoiceExctractor
 {
-    public class ActiveAccounts : BackgroundService, IActiveAccounts
+    public class EmailScrapperService : BackgroundService, IEmailScrapper
     {
         private readonly List<EmailAccount> _accounts;
         private List<int> _emails;
 
-        public ActiveAccounts(IOptions<EmailInvoiceExtractorOptions> options)
+        public EmailScrapperService(IOptions<EmailInvoiceExtractorOptions> options)
         {
             _accounts = options.Value.Accounts;
             _emails = new List<int>();

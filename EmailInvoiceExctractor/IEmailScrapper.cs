@@ -1,6 +1,6 @@
 ﻿namespace EmailInvoiceExctractor
 {
-    public interface IActiveAccounts : IDisposable
+    public interface IEmailScrapper : IDisposable
     {
         public List<int> GetProcessedEmails();
         public void TriggerImmediateCheck();

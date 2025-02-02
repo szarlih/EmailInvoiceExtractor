@@ -1,4 +1,5 @@
-﻿using MailKit;
+﻿using EmailInvoiceExctractor.Models;
+using MailKit;
 using MailKit.Net.Imap;
 using MailKit.Search;
 using System.Net.Mime;

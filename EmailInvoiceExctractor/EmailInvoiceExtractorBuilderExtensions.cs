@@ -10,7 +10,7 @@ namespace EmailInvoiceExctractor
         public static IServiceCollection AddEmailInvoiceExtractor(this IServiceCollection services, IConfiguration configuration)
         {
             var settings = configuration.GetSection("EmailInvoiceExtractor");
-            services.AddSingleton<IActiveAccounts, ActiveAccounts>();
+            services.AddSingleton<IEmailScrapper, EmailScrapperService>();
 
             return services;
         }

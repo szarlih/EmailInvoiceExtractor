@@ -1,4 +1,4 @@
-﻿namespace EmailInvoiceExctractor
+﻿namespace EmailInvoiceExctractor.Models
 {
     public class EmailAccount
     {
