@@ -7,12 +7,14 @@ namespace EmailInvoiceExctractor
     public class EmailScrapperService : BackgroundService, IEmailScrapper
     {
         private readonly List<EmailAccount> _accounts;
+        private readonly int? _bulkSize;
         private List<int> _emails;
 
         public EmailScrapperService(IOptions<EmailInvoiceExtractorOptions> options)
         {
             _accounts = options.Value.Accounts;
             _emails = new List<int>();
+            _bulkSize = options.Value.ProcessingBulkSize;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -43,7 +45,7 @@ namespace EmailInvoiceExctractor
         {
             foreach (var account in _accounts)
             {
-                _emails.Add(account.ScanForNewInvoices(DateTime.Now));
+                _emails.Add(account.ScanForNewInvoices(DateTime.Now, _bulkSize ?? 11));
             }
         }
     }
