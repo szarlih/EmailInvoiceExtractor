@@ -1,6 +1,6 @@
 ﻿using EmailInvoiceExctractor.Models;
 
-namespace EmailInvoiceExctractor
+namespace EmailInvoiceExctractor.Settings
 {
     public class EmailInvoiceExtractorOptions
     {
