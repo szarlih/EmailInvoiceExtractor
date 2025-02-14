@@ -1,8 +1,10 @@
-﻿namespace EmailInvoiceExctractor
+﻿using EmailInvoiceExctractor.Models;
+
+namespace EmailInvoiceExctractor.Services
 {
     public interface IEmailScrapper : IDisposable
     {
-        public List<int> GetProcessedEmails();
+        public List<IInvoiceEmail> GetProcessedEmails();
         public void TriggerImmediateCheck();
         public int GetProcessedEmailCount();
     }

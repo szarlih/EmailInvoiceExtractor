@@ -1,18 +1,21 @@
 ﻿using EmailInvoiceExctractor.Models;
+using EmailInvoiceExctractor.Settings;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 
-namespace EmailInvoiceExctractor
+namespace EmailInvoiceExctractor.Services
 {
     public class EmailScrapperService : BackgroundService, IEmailScrapper
     {
         private readonly List<EmailAccount> _accounts;
-        private List<int> _emails;
+        private readonly int? _bulkSize;
+        private List<IInvoiceEmail> _emails;
 
         public EmailScrapperService(IOptions<EmailInvoiceExtractorOptions> options)
         {
             _accounts = options.Value.Accounts;
-            _emails = new List<int>();
+            _bulkSize = options.Value.ProcessingBulkSize;
+            _emails = new List<IInvoiceEmail>();
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -24,7 +27,7 @@ namespace EmailInvoiceExctractor
             }
         }
 
-        public List<int> GetProcessedEmails()
+        public List<IInvoiceEmail> GetProcessedEmails()
         {
             return _emails;
         }
@@ -36,14 +39,14 @@ namespace EmailInvoiceExctractor
 
         public int GetProcessedEmailCount()
         {
-            return _emails.FirstOrDefault();
+            return _emails.Count();
         }
 
         private void ProcessEmails()
         {
             foreach (var account in _accounts)
             {
-                _emails.Add(account.ScanForNewInvoices(DateTime.Now));
+                _emails.AddRange(account.GetNewInvoiceEmails(DateTime.Now, _bulkSize ?? 10));
             }
         }
     }

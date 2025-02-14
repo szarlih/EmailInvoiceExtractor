@@ -1,9 +1,10 @@
 ﻿using EmailInvoiceExctractor.Models;
 
-namespace EmailInvoiceExctractor
+namespace EmailInvoiceExctractor.Settings
 {
     public class EmailInvoiceExtractorOptions
     {
         public List<EmailAccount> Accounts { get; set; } = new();
+        public int? ProcessingBulkSize { get; set; }
     }
 }
