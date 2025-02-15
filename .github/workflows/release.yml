@@ -2,7 +2,6 @@
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-net
 
 name: .NET nuget package
-
 on:
   pull_request:
     branches: [ "main" ]
@@ -24,5 +23,4 @@ jobs:
     - name: Create the package
       run: dotnet pack --configuration Release ./EmailInvoiceExtractor/EmailInvoiceExtractor.csproj
     - name: Push generated package to GitHub registry
-      run: dotnet nuget push ./EmailInvoiceExtractor/out/*.nupkg --skip-duplicate --no-symbols true --source "github" --api-key ${{ EMAILINVOICE_NUGET }}
-
+      run: dotnet nuget push ./EmailInvoiceExtractor/out/*.nupkg --skip-duplicate --no-symbols true --source "github" --api-key ${{ secrets.EMAILINVOICE_NUGET }}
