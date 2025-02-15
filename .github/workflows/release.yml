@@ -21,10 +21,8 @@ jobs:
       run: dotnet restore EmailInvoiceExctractor
     - name: Build
       run: dotnet build --no-restore EmailInvoiceExctractor
-    - name: Build solution and generate NuGet package
-      run: |
-           cd ./EmailInvoiceExtractor/
-           dotnet pack -c Release -o out
+    - name: Create the package
+      run: dotnet pack --configuration Release EmailInvoiceExtractor
     - name: Push generated package to GitHub registry
       run: dotnet nuget push ./EmailInvoiceExtractor/out/*.nupkg --skip-duplicate --no-symbols true
 
