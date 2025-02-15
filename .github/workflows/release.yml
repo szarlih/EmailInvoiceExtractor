@@ -22,7 +22,7 @@ jobs:
     - name: Build
       run: dotnet build --no-restore EmailInvoiceExctractor
     - name: Create the package
-      run: dotnet pack --configuration Release EmailInvoiceExtractor
+      run: dotnet pack --configuration Release ./EmailInvoiceExtractor/EmailInvoiceExtractor.csproj
     - name: Push generated package to GitHub registry
       run: dotnet nuget push ./EmailInvoiceExtractor/out/*.nupkg --skip-duplicate --no-symbols true
 
