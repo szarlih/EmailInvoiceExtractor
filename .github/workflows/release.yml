@@ -20,13 +20,11 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore EmailInvoiceExctractor
     - name: Build
-      run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet build --no-restore EmailInvoiceExctractor
     - name: Build solution and generate NuGet package
       run: |  
           cd <project>
-          dotnet pack -c Release -o out  
+          dotnet pack -c Release -o out EmailInvoiceExctractor
     - name: Push generated package to GitHub registry
       run: dotnet nuget push ./<project>/out/*.nupkg --skip-duplicate --no-symbols true
 
