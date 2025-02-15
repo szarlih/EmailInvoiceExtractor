@@ -29,7 +29,9 @@ namespace EmailInvoiceExctractor.Services
 
         public List<IInvoiceEmail> GetProcessedEmails()
         {
-            return _emails;
+            var snapshot = new List<IInvoiceEmail>(_emails);
+            _emails.Clear();
+            return snapshot;
         }
 
         public void TriggerImmediateCheck()
