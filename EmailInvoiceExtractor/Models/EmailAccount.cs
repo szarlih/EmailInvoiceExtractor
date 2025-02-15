@@ -1,7 +1,6 @@
 ﻿using MailKit;
 using MailKit.Net.Imap;
 using MailKit.Search;
-using MimeKit;
 using System.Net.Mime;
 
 namespace EmailInvoiceExctractor.Models
@@ -79,8 +78,15 @@ namespace EmailInvoiceExctractor.Models
                 imapClient.OpenInbox(this);
                 foreach (var messageId in uniqueIds)
                 {
-                    var message = imapClient.Inbox.GetMessage(messageId);
-                    messages.Add(new InvoiceEmail(message));
+                    try
+                    {
+                        var message = imapClient.Inbox.GetMessage(messageId);
+                        messages.Add(new InvoiceEmail(message));
+                    }
+                    catch(ArgumentException aex)
+                    {
+                        // add logger later
+                    }
                 }
             }
 

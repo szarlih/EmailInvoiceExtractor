@@ -1,4 +1,5 @@
-﻿using MimeKit;
+﻿using iText.Kernel.Pdf;
+using MimeKit;
 
 namespace EmailInvoiceExctractor.Models
 {
@@ -7,7 +8,6 @@ namespace EmailInvoiceExctractor.Models
         public string MessageId { get; set; }
         public string Sender { get; set; }
         public string Email { get; set; }
-
-        public IEnumerable<MimeEntity> Attachemnts { get; set; }
+        public MimePart Invoice { get; set; }
     }
 }
