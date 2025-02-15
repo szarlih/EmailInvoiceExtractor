@@ -9,10 +9,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    
     steps:
     - uses: actions/checkout@v4
-    - name: Setup .NET
+    - name: Setup .net env
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 9.0.x
