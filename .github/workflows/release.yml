@@ -18,9 +18,9 @@ jobs:
       with:
         dotnet-version: 9.0.x
     - name: Restore dependencies
-      run: dotnet restore EmailInvoiceExctractor
+      run: dotnet restore EmailInvoiceExtractor
     - name: Build
-      run: dotnet build --no-restore EmailInvoiceExctractor
+      run: dotnet build --no-restore EmailInvoiceExtractor
     - name: Create the package
       run: dotnet pack --configuration Release ./EmailInvoiceExtractor/EmailInvoiceExtractor.csproj
     - name: Push generated package to GitHub registry
