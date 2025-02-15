@@ -23,4 +23,4 @@ jobs:
     - name: Create the package
       run: dotnet pack --configuration Release ./EmailInvoiceExtractor/EmailInvoiceExtractor.csproj
     - name: Push generated package to GitHub registry
-      run: dotnet nuget push ./out/*.nupkg --skip-duplicate --no-symbols true --source https://nuget.pkg.github.com/szarlih/index.json --api-key ${{ secrets.EMAILINVOICE_NUGET }}
+      run: dotnet nuget push ./out/*.nupkg --skip-duplicate --no-symbols --source https://nuget.pkg.github.com/szarlih/index.json --api-key ${{ secrets.EMAILINVOICE_NUGET }}
