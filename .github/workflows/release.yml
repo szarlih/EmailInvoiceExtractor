@@ -23,6 +23,7 @@ jobs:
     - name: Install GitVersion
       run: dotnet tool install --global GitVersion.Tool
     - name: Get Version
+      id: gitversion
       run: |
         VERSION=$(gitversion /showvariable FullSemVer | tr -d '\r')
         if [[ -z "$VERSION" ]]; then
