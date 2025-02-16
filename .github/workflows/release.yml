@@ -21,9 +21,10 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore EmailInvoiceExtractor
     - name: Install GitVersion
-      run: dotnet tool install --global GitVersion.Tool
+      run: |
+        dotnet tool install --global GitVersion.Tool
+        echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
     - name: Get Version
-      id: gitversion
       run: |
         VERSION=$(gitversion /showvariable FullSemVer | tr -d '\r')
         if [[ -z "$VERSION" ]]; then
