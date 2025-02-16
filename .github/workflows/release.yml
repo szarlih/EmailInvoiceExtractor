@@ -18,9 +18,14 @@ jobs:
         dotnet-version: 9.0.x
     - name: Restore dependencies
       run: dotnet restore EmailInvoiceExtractor
+    - name: Install GitVersion
+      run: dotnet tool install --global GitVersion.Tool
+    - name: Determine Version
+      id: gitversion
+      run: echo "VERSION=$(gitversion /showvariable FullSemVer)" >> $GITHUB_ENV
     - name: Build
-      run: dotnet build --no-restore EmailInvoiceExtractor
+      run: dotnet build --no-restore EmailInvoiceExtractor /p:Version=${{ env.VERSION }}
     - name: Create the package
-      run: dotnet pack --configuration Release ./EmailInvoiceExtractor/EmailInvoiceExtractor.csproj
+      run: dotnet pack --configuration Release ./EmailInvoiceExtractor/EmailInvoiceExtractor.csproj /p:PackageVersion=${{ env.VERSION }}
     - name: Push generated package to GitHub registry
       run: dotnet nuget push ./out/*.nupkg --skip-duplicate --no-symbols --source https://nuget.pkg.github.com/szarlih/index.json --api-key ${{ secrets.EMAILINVOICE_NUGET }}
