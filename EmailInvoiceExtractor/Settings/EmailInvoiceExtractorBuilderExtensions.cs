@@ -1,4 +1,5 @@
 ﻿using EmailInvoiceExctractor.Services;
+using EmailInvoiceExtractor.Services.Imap;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,6 +12,7 @@ namespace EmailInvoiceExctractor.Settings
         public static IServiceCollection AddEmailInvoiceExtractor(this IServiceCollection services, IConfiguration configuration)
         {
             var settings = configuration.GetSection("EmailInvoiceExtractor");
+            services.AddSingleton<IImapService, ImapInteractionsService>();
             services.AddSingleton<IEmailScrapper, EmailScrapperService>();
 
             return services;

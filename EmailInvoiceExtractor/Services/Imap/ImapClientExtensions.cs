@@ -2,7 +2,7 @@
 using MailKit;
 using MailKit.Net.Imap;
 
-namespace EmailInvoiceExctractor
+namespace EmailInvoiceExtractor.Services.Imap
 {
     public static class ImapClientExtensdions
     {

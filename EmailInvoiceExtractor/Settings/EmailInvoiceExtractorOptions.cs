@@ -6,5 +6,6 @@ namespace EmailInvoiceExctractor.Settings
     {
         public List<EmailAccount> Accounts { get; set; } = new();
         public int? ProcessingBulkSize { get; set; }
+        public List<string> InvoiceKeywords { get; set; } = new();
     }
 }
