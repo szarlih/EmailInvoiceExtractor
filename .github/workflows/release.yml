@@ -35,6 +35,8 @@ jobs:
         echo "✅ Set VERSION to $VERSION"
     - name: Build
       run: dotnet build --no-restore EmailInvoiceExtractor /p:Version=${{ env.VERSION }}
+    - name: Test
+      run: dotnet test .\EmailInvoiceExtractorTests\EmailInvoiceExtractorTests.csproj --configuration Release --no-build --verbosity normal
     - name: Create the package
       run: |
         mkdir -p ./out
