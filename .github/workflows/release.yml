@@ -22,9 +22,15 @@ jobs:
       run: dotnet restore EmailInvoiceExtractor
     - name: Install GitVersion
       run: dotnet tool install --global GitVersion.Tool
-    - name: Determine Version
-      id: gitversion
-      run: echo "VERSION=$(gitversion /showvariable FullSemVer)" >> $GITHUB_ENV
+    - name: Get Version
+      run: |
+        VERSION=$(gitversion /showvariable FullSemVer | tr -d '\r')
+        if [[ -z "$VERSION" ]]; then
+          echo "❌ ERROR: GitVersion did not return a version!" >&2
+          exit 1
+        fi
+        echo "VERSION=$VERSION" >> $GITHUB_ENV
+        echo "✅ Set VERSION to $VERSION"
     - name: Build
       run: dotnet build --no-restore EmailInvoiceExtractor /p:Version=${{ env.VERSION }}
     - name: Create the package
